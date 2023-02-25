@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EsteticaControl</string>
+    <string name="nome_cliente">Nome</string>
+    <string name="sobrenome_cliente">Sobrenome</string>
+    <string name="idade_nasc_cliente">Data Nascimento</string>
+    <string name="genero_feminino">Feminino</string>
+    <string name="genero_masculino">Masculino</string>
+    <string name="genero">Gênero</string>
+
+    <string-array name="onde_me_encontrou">
+        <item>Google</item>
+        <item>Instagram</item>
+        <item>Facebook</item>
+        <item>Linkedin</item>
+    </string-array>
+</resources>
