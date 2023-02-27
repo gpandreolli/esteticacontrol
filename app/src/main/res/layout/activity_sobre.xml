@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SobreActivity"
+    android:background="@color/grey">
+
+    <TextView
+        android:id="@+id/lblAluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/aluno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/lblNomeAluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/nomeAluno"
+        app:layout_constraintBottom_toBottomOf="@+id/lblAluno"
+
+        app:layout_constraintStart_toEndOf="@+id/lblAluno" />
+
+    <TextView
+        android:id="@+id/lblCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/curso"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/lblAluno"
+        app:layout_constraintTop_toBottomOf="@+id/lblAluno" />
+
+    <TextView
+        android:id="@+id/lblNomeCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/nomeCurso"
+        app:layout_constraintStart_toEndOf="@+id/lblCurso"
+        app:layout_constraintTop_toTopOf="@+id/lblCurso" />
+
+    <TextView
+        android:id="@+id/lblEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/lblCurso"
+        app:layout_constraintTop_toBottomOf="@+id/lblCurso" />
+
+    <TextView
+        android:id="@+id/lblEmailAluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emailAluno"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toEndOf="@+id/lblEmail"
+        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="205dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+
+    <TextView
+        android:id="@+id/lblUtfpr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/utfpr"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="64dp" />
+
+    <TextView
+        android:id="@+id/lblSobre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/sobreApp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEmailAluno" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

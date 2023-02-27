@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">EsteticaControl</string>
+    <string name="nome_cliente">Nome</string>
+    <string name="sobrenome_cliente">Sobrenome</string>
+    <string name="idade_nasc_cliente">Data Nascimento</string>
+    <string name="genero_feminino">Feminino</string>
+    <string name="genero_masculino">Masculino</string>
+    <string name="genero">Gênero</string>
+    <string name="aluno">Aluno</string>
+    <string name="nomeAluno">Glauber P. Andreolli</string>
+    <string name="curso">Curso</string>
+    <string name="nomeCurso">Pós Graduação Java</string>
+    <string name="email">E-mail</string>
+    <string name="emailAluno">gp.andreolli@gmail.com</string>
+    <string name="utfpr">Universidade Tecnológica Federal do Paraná</string>
+    <string name="sobreApp">Este aplicativo realiza o controle de clientes e atendimentos realizados por uma esteticista em sua clínica</string>
+
+    <string-array name="onde_me_encontrou">
+        <item></item>
+        <item>Google</item>
+        <item>Instagram</item>
+        <item>Facebook</item>
+        <item>Linkedin</item>
+    </string-array>
+</resources>
