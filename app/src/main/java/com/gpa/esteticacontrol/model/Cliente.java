@@ -12,6 +12,9 @@ public class Cliente {
     private boolean indicacao;
     private String ondeEncontrou;
 
+    public Cliente() {
+    }
+
     public Cliente(Long id, String nome, String sobreNome, Date dtNasc, String genero, boolean indicacao, String ondeEncontrou) {
         this.id = id;
         this.nome = nome;

@@ -2,7 +2,10 @@ package com.gpa.esteticacontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +13,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.gpa.esteticacontrol.model.Cliente;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Random;
 
 public class ClienteActivity extends AppCompatActivity{
 
@@ -43,7 +52,11 @@ public class ClienteActivity extends AppCompatActivity{
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                salvar(v);
+                try {
+                    salvar(v);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -66,23 +79,69 @@ public class ClienteActivity extends AppCompatActivity{
         rdbMasculino.setChecked(false);
     }
 
-    private void salvar(View v) {
+    private void salvar(View v) throws ParseException {
         String genero;
-
+        boolean indicacao = false;
+        boolean validaDados = false;
+        long idRandom = new Random().nextLong();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        if(chkIndicacao.isChecked()){
+            indicacao = true;
+        }
         if(rdbMasculino.isChecked()){
             genero = "masculino";
         }else{
             genero = "feminino";
         }
-        String textToast = "nome:"+edtNomeCliente.getText().toString()+
-                "\nsobronome: "+edtSobrenome.getText().toString()+
-                "\ndata Nasc.:"+edtDataNascimento.getText().toString()+
-                "\nOnde Encontrou"+spnOndeEncontrou.getSelectedItem().toString()+
-                "\nindicaçao: "+chkIndicacao.getText().toString()+
-                "\ngenero:"+genero;
+        validaDados = validaFormulario();
 
-      Toast.makeText(ClienteActivity.this,textToast, Toast.LENGTH_LONG).show();
+        String dataNasc = edtDataNascimento.getText().toString();
+        System.out.println(dataNasc);
 
+        if(validaDados){
+            Intent intent = new Intent();
+            intent.putExtra("id", idRandom);
+            intent.putExtra("nome", edtNomeCliente.getText().toString());
+            intent.putExtra("sobreNome", edtSobrenome.getText().toString());
+            intent.putExtra("dtNasc", dataNasc);
+            intent.putExtra("genero", genero);
+            intent.putExtra("indicacao", indicacao);
+            intent.putExtra("ondeEncontrou", spnOndeEncontrou.getSelectedItem().toString());
+
+            setResult(Activity.RESULT_OK,intent);
+            finish();
+
+        }else{
+            Toast.makeText(ClienteActivity.this,"Favor preencher os dados corretamente", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private boolean validaFormulario() {
+        boolean retorno = false;
+
+        if(!TextUtils.isEmpty(edtNomeCliente.getText().toString())){
+            retorno = true;
+        }else{
+            edtNomeCliente.setError("Favor preencher o nome");
+            edtNomeCliente.requestFocus();
+        }
+
+        if(!TextUtils.isEmpty(edtSobrenome.getText().toString())){
+            retorno = true;
+        }else{
+            edtSobrenome.setError("Favor preencher o sobrenome");
+            edtSobrenome.requestFocus();
+        }
+
+        if(!TextUtils.isEmpty(edtDataNascimento.getText().toString())){
+            retorno = true;
+        }else{
+            edtDataNascimento.setError("*");
+            edtDataNascimento.requestFocus();
+        }
+
+        return retorno;
     }
 
 
