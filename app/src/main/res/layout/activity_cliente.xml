@@ -1,145 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ClienteActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ClienteActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtNomeCliente"
-        android:layout_width="108dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/nome_cliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        >
 
-    <EditText
-        android:id="@+id/edtNomeCliente"
-        android:layout_width="354dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/txtNomeCliente"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeCliente" />
+        <TextView
+            android:id="@+id/txtNomeCliente"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nome_cliente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtSobrenomeCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/sobrenome_cliente"
-        app:layout_constraintStart_toStartOf="@+id/edtNomeCliente"
-        app:layout_constraintTop_toBottomOf="@+id/edtNomeCliente" />
+        <EditText
+            android:id="@+id/edtNomeCliente"
+            android:layout_width="354dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/txtNomeCliente"
+            app:layout_constraintTop_toBottomOf="@+id/txtNomeCliente" />
 
-    <EditText
-        android:id="@+id/edtSobrenome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/txtSobrenomeCliente"
-        app:layout_constraintTop_toBottomOf="@+id/txtSobrenomeCliente" />
-
-    <TextView
-        android:id="@+id/txtIdadeNasc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/idade_nasc_cliente"
-        app:layout_constraintStart_toStartOf="@+id/edtSobrenome"
-        app:layout_constraintTop_toBottomOf="@+id/edtSobrenome" />
-
-    <RadioGroup
-        android:id="@+id/rgpGenero"
-        android:layout_width="wrap_content"
-        android:layout_height="107dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-        <RadioButton
-            android:id="@+id/rdbFeminino"
+        <TextView
+            android:id="@+id/txtSobrenomeCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/genero_feminino" />
+            android:layout_marginTop="16dp"
+            android:text="@string/sobrenome_cliente"
+            app:layout_constraintStart_toStartOf="@+id/edtNomeCliente"
+            app:layout_constraintTop_toBottomOf="@+id/edtNomeCliente" />
 
-        <RadioButton
-            android:id="@+id/rdbMasculino"
+        <EditText
+            android:id="@+id/edtSobrenome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/genero_masculino" />
-    </RadioGroup>
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/txtSobrenomeCliente"
+            app:layout_constraintTop_toBottomOf="@+id/txtSobrenomeCliente" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/genero"
-        app:layout_constraintStart_toStartOf="@+id/edtDataNasc"
-        app:layout_constraintTop_toBottomOf="@+id/edtDataNasc" />
+        <TextView
+            android:id="@+id/txtIdadeNasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/idade_nasc_cliente"
+            app:layout_constraintStart_toStartOf="@+id/edtSobrenome"
+            app:layout_constraintTop_toBottomOf="@+id/edtSobrenome" />
 
-    <EditText
-        android:id="@+id/edtDataNasc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="@+id/txtIdadeNasc"
-        app:layout_constraintTop_toBottomOf="@+id/txtIdadeNasc" />
+        <RadioGroup
+            android:id="@+id/rgpGenero"
+            android:layout_width="wrap_content"
+            android:layout_height="107dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-    <Spinner
-        android:id="@+id/spnOndeEncontrou"
-        android:layout_width="224dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:entries="@array/onde_me_encontrou"
-        app:layout_constraintStart_toStartOf="@+id/txtSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
+            <RadioButton
+                android:id="@+id/rdbFeminino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/genero_feminino" />
 
-    <TextView
-        android:id="@+id/txtSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Onde me Encontrou"
-        app:layout_constraintStart_toStartOf="@+id/chkIndicacao"
-        app:layout_constraintTop_toBottomOf="@+id/chkIndicacao" />
+            <RadioButton
+                android:id="@+id/rdbMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/genero_masculino" />
+        </RadioGroup>
 
-    <CheckBox
-        android:id="@+id/chkIndicacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Indicação"
-        app:layout_constraintStart_toStartOf="@+id/rgpGenero"
-        app:layout_constraintTop_toBottomOf="@+id/rgpGenero" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/genero"
+            app:layout_constraintStart_toStartOf="@+id/edtDataNasc"
+            app:layout_constraintTop_toBottomOf="@+id/edtDataNasc" />
 
-    <Button
-        android:id="@+id/btnSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:text="Salvar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnOndeEncontrou" />
+        <EditText
+            android:id="@+id/edtDataNasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:inputType="date"
+            app:layout_constraintStart_toStartOf="@+id/txtIdadeNasc"
+            app:layout_constraintTop_toBottomOf="@+id/txtIdadeNasc" />
 
-    <Button
-        android:id="@+id/btnLimpar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Limpar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSalvar"
-        app:layout_constraintTop_toBottomOf="@+id/spnOndeEncontrou" />
+        <Spinner
+            android:id="@+id/spnOndeEncontrou"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:entries="@array/onde_me_encontrou"
+            app:layout_constraintStart_toStartOf="@+id/txtSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
+
+        <TextView
+            android:id="@+id/txtSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Onde me Encontrou"
+            app:layout_constraintStart_toStartOf="@+id/chkIndicacao"
+            app:layout_constraintTop_toBottomOf="@+id/chkIndicacao" />
+
+        <CheckBox
+            android:id="@+id/chkIndicacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Indicação"
+            app:layout_constraintStart_toStartOf="@+id/rgpGenero"
+            app:layout_constraintTop_toBottomOf="@+id/rgpGenero" />
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
+            android:text="Salvar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnOndeEncontrou" />
+
+        <Button
+            android:id="@+id/btnLimpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="Limpar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnSalvar"
+            app:layout_constraintTop_toBottomOf="@+id/spnOndeEncontrou" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

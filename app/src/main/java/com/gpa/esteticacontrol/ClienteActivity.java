@@ -31,6 +31,21 @@ public class ClienteActivity extends AppCompatActivity{
     private Spinner spnOndeEncontrou;
     private Button btnSalvar;
     private Button btnLimpar;
+    private String MODO = "MODO";
+    public static final int    NOVO    = 1;
+    public static final int    ALTERAR = 2;
+    private int modo;
+
+    private String nome;
+    private String sobreNome;
+    private String genero;
+    private Boolean indicacao;
+    private String ondeEncontrou;
+    private String dataNascimento;
+
+    private Long idCliente;
+
+    SimpleDateFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +63,53 @@ public class ClienteActivity extends AppCompatActivity{
         btnSalvar = (Button)findViewById(R.id.btnSalvar);
         Object ondeEncontrouSelectedItem = spnOndeEncontrou.getSelectedItem();
         ondeEncontrouSelectedItem.toString();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(bundle != null){
+            modo = bundle.getInt(MODO, NOVO);
+
+            if(modo == NOVO){
+
+
+            }else{
+            //    formatter = new SimpleDateFormat("dd/MM/yyyy");
+                nome = bundle.getString("Nome");
+                sobreNome = bundle.getString("SobreNome");
+                dataNascimento = bundle.getString("DataNasc");
+                indicacao = bundle.getBoolean("Indicacao");
+                genero = bundle.getString("Genero");
+                ondeEncontrou = bundle.getString("OndeEncontrou");
+                idCliente = bundle.getLong("Id");
+
+                edtNomeCliente.setText(nome);
+                edtSobrenome.setText(sobreNome);
+                edtDataNascimento.setText(dataNascimento);
+                chkIndicacao.setChecked(indicacao);
+
+                if(genero.equals("feminino")){
+                    rdbFeminino.setChecked(true);
+                    rdbMasculino.setChecked(false);
+                }else{
+                    rdbFeminino.setChecked(false);
+                    rdbMasculino.setChecked(true);
+                }
+
+                switch (ondeEncontrou){
+                    case "Google":
+                        spnOndeEncontrou.setSelection(1);
+                    case "Instagram":
+                        spnOndeEncontrou.setSelection(1);
+                    case "Facebook":
+                        spnOndeEncontrou.setSelection(1);
+                    case "Linkedin":
+                        spnOndeEncontrou.setSelection(1);
+                    default:
+                        spnOndeEncontrou.setSelection(0);;
+                }
+            }
+        }
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +132,13 @@ public class ClienteActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_CANCELED);
+        super.onBackPressed();
+        finish();
+    }
+
     public void limparCampos(View view){
         edtNomeCliente.setText(null);
         edtSobrenome.setText(null);
@@ -80,10 +149,15 @@ public class ClienteActivity extends AppCompatActivity{
     }
 
     private void salvar(View v) throws ParseException {
+        if (modo == ALTERAR ){
+
+        }
+        Intent intent = new Intent();
         String genero;
         boolean indicacao = false;
         boolean validaDados = false;
         long idRandom = new Random().nextLong();
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         if(chkIndicacao.isChecked()){
             indicacao = true;
@@ -98,8 +172,9 @@ public class ClienteActivity extends AppCompatActivity{
         String dataNasc = edtDataNascimento.getText().toString();
         System.out.println(dataNasc);
 
-        if(validaDados){
-            Intent intent = new Intent();
+
+        if(validaDados && modo != ALTERAR){
+
             intent.putExtra("id", idRandom);
             intent.putExtra("nome", edtNomeCliente.getText().toString());
             intent.putExtra("sobreNome", edtSobrenome.getText().toString());
@@ -111,10 +186,52 @@ public class ClienteActivity extends AppCompatActivity{
             setResult(Activity.RESULT_OK,intent);
             finish();
 
+        }else if (modo == ALTERAR && validaDadosAlterados()){
+            intent.putExtra("id", idRandom);
+            intent.putExtra("nome", edtNomeCliente.getText().toString());
+            intent.putExtra("sobreNome", edtSobrenome.getText().toString());
+            intent.putExtra("dtNasc", dataNasc);
+            intent.putExtra("genero", genero);
+            intent.putExtra("indicacao", indicacao);
+            intent.putExtra("ondeEncontrou", spnOndeEncontrou.getSelectedItem().toString());
+            intent.putExtra(MODO,ALTERAR);
+
+            setResult(Activity.RESULT_OK,intent);
+            finish();
         }else{
             Toast.makeText(ClienteActivity.this,"Favor preencher os dados corretamente", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    private boolean validaDadosAlterados() {
+        String generoNovo;
+        boolean indicacaoNovo =false;
+        if(rdbMasculino.isChecked()){
+            generoNovo = "masculino";
+        }else{
+            generoNovo = "feminino";
+        }
+
+        if(chkIndicacao.isChecked()){
+            indicacaoNovo = true;
+        }
+
+        if(nome.equals(edtNomeCliente.getText())){
+            if(sobreNome.equals(edtSobrenome.getText())){
+                if(dataNascimento.equals(edtDataNascimento.getText())){
+                    if(genero.equals(generoNovo)){
+                        if(indicacaoNovo == indicacao){
+                            if(ondeEncontrou.equals(spnOndeEncontrou.getSelectedItem().toString())){
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     private boolean validaFormulario() {
@@ -125,6 +242,7 @@ public class ClienteActivity extends AppCompatActivity{
         }else{
             edtNomeCliente.setError("Favor preencher o nome");
             edtNomeCliente.requestFocus();
+            retorno = false;
         }
 
         if(!TextUtils.isEmpty(edtSobrenome.getText().toString())){
@@ -132,13 +250,15 @@ public class ClienteActivity extends AppCompatActivity{
         }else{
             edtSobrenome.setError("Favor preencher o sobrenome");
             edtSobrenome.requestFocus();
+            retorno = false;
         }
 
         if(!TextUtils.isEmpty(edtDataNascimento.getText().toString())){
             retorno = true;
         }else{
-            edtDataNascimento.setError("*");
+            edtDataNascimento.setError("Favor informar a data de nascimento");
             edtDataNascimento.requestFocus();
+            retorno = false;
         }
 
         return retorno;
