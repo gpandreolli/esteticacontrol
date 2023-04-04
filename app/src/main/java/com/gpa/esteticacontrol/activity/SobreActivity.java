@@ -1,8 +1,10 @@
-package com.gpa.esteticacontrol;
+package com.gpa.esteticacontrol.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.gpa.esteticacontrol.R;
 
 public class SobreActivity extends AppCompatActivity {
 

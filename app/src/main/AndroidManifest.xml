@@ -12,13 +12,13 @@
         android:theme="@style/Theme.EsteticaControl"
         tools:targetApi="31">
         <activity
-            android:name=".SobreActivity"
+            android:name=".activity.SobreActivity"
             android:exported="false" />
         <activity
-            android:name=".ClienteActivity"
+            android:name=".activity.ClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaClienteActivity"
+            android:name=".activity.ListaClienteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

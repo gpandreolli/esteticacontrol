@@ -1,4 +1,4 @@
-package com.gpa.esteticacontrol;
+package com.gpa.esteticacontrol.activity;
 
 import androidx.annotation.NonNull;
 
@@ -8,7 +8,6 @@ import androidx.appcompat.view.ActionMode;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -16,16 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.gpa.esteticacontrol.R;
 import com.gpa.esteticacontrol.adapter.AdapterCliente;
+import com.gpa.esteticacontrol.database.EsteticaDatabase;
 import com.gpa.esteticacontrol.model.Cliente;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaClienteActivity extends AppCompatActivity {
 
@@ -40,7 +41,9 @@ public class ListaClienteActivity extends AppCompatActivity {
     private AdapterCliente adapterClientes ;
     private int posicao;
     private View viewSelecionada;
-    public static final int  ALTERAR = 2;
+    public static final int ALTERAR = 2;
+    public static final int NOVO = 1;
+    EsteticaDatabase database;
 
 
     private ActionMode.Callback actionModeCallBack = new ActionMode.Callback() {
@@ -96,21 +99,27 @@ public class ListaClienteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cliente);
         clientes = new ArrayList<>();
-        adapterClientes = new AdapterCliente(ListaClienteActivity.this, R.layout.layout_item_cliente,clientes);
-
-
-
         listViewClientes = findViewById(R.id.listViewClientes);
+
+        database = EsteticaDatabase.getDatabase(this);
+        clientes = (ArrayList<Cliente>) database.clienteDao().queryAll();
+        adapterClientes = new AdapterCliente(ListaClienteActivity.this, R.layout.layout_item_cliente,clientes);
+        listViewClientes.setAdapter(adapterClientes);
+
+
+
 
 
         View header = (View) getLayoutInflater().inflate(R.layout.layout_item_cliente, null);
-        listViewClientes.setAdapter(adapterClientes);
+
+        //popularListaClientes();
         listViewClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             String indicacao = "Não";
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cliente cliente = (Cliente) listViewClientes.getItemAtPosition(position);
+                formatter = new SimpleDateFormat("dd/MM/yyyy");
                 if(cliente.isIndicacao()){
                      indicacao = "Sim";
                 }
@@ -153,9 +162,16 @@ public class ListaClienteActivity extends AppCompatActivity {
 
     }
 
+    private void popularListaClientes() {
+
+        clientes = (ArrayList<Cliente>) database.clienteDao().queryAll();
+        listViewClientes.setAdapter(adapterClientes);
+
+  }
+
     private void adicionar( AdapterCliente adapterCliente) {
         Intent intent = new Intent(this,ClienteActivity.class);
-        startActivityForResult(intent,2);
+        startActivityForResult(intent,NOVO);
         adapterCliente.notifyDataSetChanged();
     }
 
@@ -183,7 +199,9 @@ public class ListaClienteActivity extends AppCompatActivity {
     }
 
     private void excluirCliente() {
+        Cliente cliente = clientes.get(posicao);
         clientes.remove(posicao);
+        database.clienteDao().delete(cliente);
         adapterClientes.notifyDataSetChanged();
     }
 
@@ -196,7 +214,7 @@ public class ListaClienteActivity extends AppCompatActivity {
 
             if(bundle!= null){
 
-               if(bundle.getInt("MODO") == 2){
+               if(bundle.getInt("MODO") == ALTERAR){
                    //formatter = new SimpleDateFormat("dd/MM/yyyy");
                    Cliente cliente = (Cliente) listViewClientes.getItemAtPosition(posicao);
                    cliente.setId(bundle.getLong("id"));
@@ -210,6 +228,11 @@ public class ListaClienteActivity extends AppCompatActivity {
                    cliente.setGenero(bundle.getString("genero"));
                    cliente.setIndicacao(bundle.getBoolean("indicacao"));
                    cliente.setOndeEncontrou(bundle.getString("ondeEncontrou"));
+
+                   EsteticaDatabase database = EsteticaDatabase.getDatabase(this);
+
+                   database.clienteDao().update(cliente);
+
                    adapterClientes.notifyDataSetChanged();
                    posicao = -1;
 
@@ -237,6 +260,7 @@ public class ListaClienteActivity extends AppCompatActivity {
     private void addClientes(Bundle bundle) throws ParseException {
         Cliente cliente = new Cliente();
         formatter = new SimpleDateFormat("dd/MM/yyyy");
+        EsteticaDatabase database = EsteticaDatabase.getDatabase(this);
 
 
 
@@ -247,7 +271,9 @@ public class ListaClienteActivity extends AppCompatActivity {
         cliente.setGenero(bundle.getString("genero"));
         cliente.setIndicacao(bundle.getBoolean("indicacao"));
         cliente.setOndeEncontrou(bundle.getString("ondeEncontrou"));
-        clientes.add(cliente);
+        //clientes.add(cliente);
+        database.clienteDao().insert(cliente);
+        popularListaClientes();
     }
 
     @Override

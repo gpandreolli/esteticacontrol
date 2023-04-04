@@ -1,4 +1,4 @@
-package com.gpa.esteticacontrol;
+package com.gpa.esteticacontrol.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.gpa.esteticacontrol.model.Cliente;
+import com.gpa.esteticacontrol.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,6 +73,8 @@ public class ClienteActivity extends AppCompatActivity{
             if(modo == NOVO){
 
 
+
+
             }else{
             //    formatter = new SimpleDateFormat("dd/MM/yyyy");
                 nome = bundle.getString("Nome");
@@ -99,14 +101,18 @@ public class ClienteActivity extends AppCompatActivity{
                 switch (ondeEncontrou){
                     case "Google":
                         spnOndeEncontrou.setSelection(1);
+                        break;
                     case "Instagram":
-                        spnOndeEncontrou.setSelection(1);
+                        spnOndeEncontrou.setSelection(2);
+                        break;
                     case "Facebook":
-                        spnOndeEncontrou.setSelection(1);
+                        spnOndeEncontrou.setSelection(3);
+                        break;
                     case "Linkedin":
-                        spnOndeEncontrou.setSelection(1);
+                      spnOndeEncontrou.setSelection(4);
+                        break;
                     default:
-                        spnOndeEncontrou.setSelection(0);;
+                        spnOndeEncontrou.setSelection(0);
                 }
             }
         }
